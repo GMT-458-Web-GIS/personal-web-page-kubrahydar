@@ -1,0 +1,240 @@
+
+/* -------------------------------------- */
+/* 1. GENERAL PAGE AND BACKGROUND STYLES */
+/* -------------------------------------- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0d1721; /* Very dark background close to black */
+    color: #ecf0f1; 
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    min-height: 100vh;
+}
+
+/* MAIN CARD STRUCTURE - Centers all content */
+.main-card {
+    max-width: 900px; 
+    margin: 50px auto; 
+    background-color: #1f2833; /* Card Background */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+    padding-bottom: 30px;
+}
+
+/* -------------------------------------- */
+/* 2. INTRO SECTION (Text LEFT, Photo RIGHT - SIDE BY SIDE, LARGE PHOTO) */
+/* -------------------------------------- */
+.intro-header-flex {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-around; 
+    padding: 40px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap; 
+}
+
+.bio-text {
+    flex-basis: 55%; /* Text covers 55% of the area */
+    padding-right: 30px; 
+    text-align: left; 
+    color: #ecf0f1; 
+}
+.bio-text h2 {
+    color: #66fcf1; 
+    font-size: 2.2em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+.bio-text p {
+    font-size: 1.05em;
+    line-height: 1.6; /* Line spacing reduced for a more compact look */
+    color: #c5c6c7;
+    margin-bottom: 10px; /* Space between paragraphs reduced */
+}
+
+.profile-photo-container {
+    flex-basis: 35%; 
+    flex-shrink: 0;
+    width: 250px; /* Photo Size */
+    height: 250px; /* Photo Size */
+    border-radius: 5px; 
+    overflow: hidden; 
+    border: 4px solid #66fcf1; 
+    box-shadow: 0 0 0 10px rgba(102, 252, 241, 0.1); 
+}
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    display: block;
+    background-color: #3a475a; 
+}
+
+/* Adaptations for small screens */
+@media (max-width: 768px) {
+    .intro-header-flex {
+        flex-direction: column; 
+        padding: 30px 20px;
+    }
+    .bio-text {
+        padding-right: 0;
+        margin-bottom: 20px;
+        text-align: center;
+        flex-basis: 100%;
+    }
+    .profile-photo-container {
+        margin-top: 20px;
+        width: 180px;
+        height: 180px;
+    }
+}
+
+
+/* -------------------------------------- */
+/* 3. NAVIGATION STYLES */
+/* -------------------------------------- */
+.card-nav {
+    margin: 20px auto;
+    padding: 15px 0;
+}
+.card-nav a {
+    color: #66fcf1; 
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: 2px solid #66fcf1; 
+    border-radius: 25px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: bold;
+}
+.card-nav a:hover {
+    background-color: #66fcf1; 
+    color: #1f2833;
+}
+
+.card-title {
+    color: #f39c12; 
+    padding: 10px 0;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+/* -------------------------------------- */
+/* 4. TIMELINE MAIN STYLE */
+/* -------------------------------------- */
+.timeline {
+    position: relative;
+    max-width: 800px; 
+    margin: 40px auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: initial; 
+}
+
+/* Center Line */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px; 
+    background-color: #45a29e; 
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+    z-index: -1;
+}
+
+/* -------------------------------------- */
+/* 5. TIMELINE ITEMS (BOXES) */
+/* -------------------------------------- */
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+}
+
+/* Contact point of each box with the center line */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 15px; 
+    height: 15px;
+    right: -10.5px;
+    background-color: #1f2833; 
+    border: 3px solid #66fcf1; 
+    top: 25px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* Style and positions for left boxes */
+.left {
+    left: 0;
+    animation: slideInFromLeft 1.2s ease-out forwards;
+    opacity: 0; 
+}
+.left::after {
+    left: auto;
+    right: -8.5px; 
+}
+
+/* Style and positions for right boxes */
+.right {
+    left: 50%;
+    animation: slideInFromRight 1.2s ease-out forwards;
+    opacity: 0; 
+}
+.right::after {
+    left: -8.5px;
+}
+
+/* Event box content */
+.timeline-content {
+    padding: 20px 25px;
+    background-color: #3a475a; 
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    text-align: left;
+    transition: transform 0.3s ease;
+    color: #ecf0f1; 
+}
+
+.timeline-content:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+.timeline-content h2 {
+    color: #f39c12; 
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.6em;
+}
+.timeline-content p, .timeline-content small {
+    color: #c5c6c7;
+}
+
+/* -------------------------------------- */
+/* 6. CSS ANIMATIONS (15% REQUIREMENT) */
+/* -------------------------------------- */
+@keyframes slideInFromRight {
+    0% { opacity: 0; transform: translateX(50px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInFromLeft {
+    0% { opacity: 0; transform: translateX(-50px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Animation Delays */
+.timeline-item:nth-child(1) { animation-delay: 0.2s; }
+.timeline-item:nth-child(2) { animation-delay: 0.4s; }
+.timeline-item:nth-child(3) { animation-delay: 0.6s; }
+.timeline-item:nth-child(4) { animation-delay: 0.8s; }
+.timeline-item:nth-child(5) { animation-delay: 1.0s; }
+.timeline-item:nth-child(6) { animation-delay: 1.2s; }
+.timeline-item:nth-child(7) { animation-delay: 1.4s; }

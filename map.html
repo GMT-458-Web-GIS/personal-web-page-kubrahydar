@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Geographical Relations Map - Hatice Kübra Haydar</title>
+    <link rel="stylesheet" href="style.css"> 
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
+    <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
+    <style>
+        /* Map and Pop-up Styles */
+        #map {
+            width: 100%;
+            height: 500px;
+            border: 2px solid #66fcf1; 
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* Newly Added Control Panel Styles */
+        .map-controls-panel {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-top: 15px;
+            border-top: 1px solid rgba(102, 252, 241, 0.2);
+            gap: 15px; 
+        }
+
+        /* Coordinate Information Box Styles */
+        .coordinate-display {
+            background-color: #3a475a;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            color: #c5c6c7;
+            text-align: left;
+            flex-grow: 1;
+            min-width: 300px; 
+            border-left: 3px solid #66fcf1;
+        }
+        .coordinate-display strong {
+            color: #66fcf1;
+        }
+
+        /* Filter Buttons Styles */
+        .filter-buttons {
+            display: flex;
+            gap: 10px; 
+        }
+        .filter-buttons button {
+            background-color: #1f2833;
+            color: #66fcf1;
+            border: 1px solid #66fcf1;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        .filter-buttons button:hover {
+            background-color: #0d1721;
+        }
+        /* Active Filter Button Style */
+        .filter-buttons button.active {
+            background-color: #66fcf1;
+            color: #1f2833;
+            font-weight: bold;
+        }
+
+        /* Pop-up Styles */
+        .ol-popup {
+            position: absolute;
+            background-color: #1f2833;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #66fcf1;
+            bottom: 12px;
+            left: -50px;
+            min-width: 250px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            color: #ecf0f1;
+        }
+        .ol-popup-closer {
+            text-decoration: none;
+            position: absolute;
+            top: 2px;
+            right: 8px;
+            color: #66fcf1;
+            font-weight: bold;
+        }
+        .ol-popup-closer:after {
+            content: "✖";
+        }
+        
+        /* NEW STYLES FOR VISUAL SIZE ISSUE FIX */
+        .popup-image-container {
+            width: 100%;
+            height: auto; 
+            max-height: 300px; /* Slight upper limit to prevent the pop-up from getting too big */
+            margin-top: 10px;
+            border-radius: 4px;
+            border: 1px solid #c5c6c7;
+            display: flex; /* To center the image inside the box */
+            align-items: center; 
+            justify-content: center; 
+            background-color: #3a475a; 
+        }
+        .popup-image-container img {
+            max-width: 100%; /* Fit the image width to the pop-up */
+            max-height: 300px; /* Fit the image height to the pop-up */
+            height: auto;      
+            width: auto;       
+            display: block;    
+            object-fit: contain; /* MAINTAIN ASPECT RATIO and DO NOT CROP (Solution here) */
+        }
+    </style>
+</head>
+<body>
+    
+    <main class="main-card">
+        
+        <nav class="card-nav">
+            <a href="index.html">Home Page</a>
+            <a href="technologies.html">Skills Card</a> 
+            <a href="map.html">Map</a>
+        </nav>
+        
+        <h1 class="card-title">Personal Network Map</h1> 
+        <p style="color: #c5c6c7;">A map showing the "Geographical Relations Network" across my education, internship, and living areas. Click on the map to read coordinates, and use filters to manage thematic layers.</p>
+
+        <div id="map"></div>
+        
+        <div class="map-controls-panel">
+            <div id="coordinate-output" class="coordinate-display">
+                Click on the map to read coordinates.
+            </div>
+            <div class="filter-buttons">
+                </div>
+        </div>
+
+        <div id="popup" class="ol-popup">
+            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+            <div id="popup-content"></div>
+        </div>
+
+    </main>
+    
+    <script>
+        // **********************************************
+        // 1. DATA DEFINITION (UPDATED COORDINATES AND IMAGE NAMES)
+        // **********************************************
+        const nodes = [
+            // Format: { name, lon, lat, type, details, imageFileName }
+            { 
+                name: "Hacettepe Geomatics Eng. (Education)", 
+                lon: 32.7333853, 
+                lat: 39.865564, 
+                type: "Education", 
+                details: "Geomatics Eng. Education 2021-...", 
+                imageFileName: "department.jpg" 
+            },
+            { 
+                name: "HGM (Internship I)", 
+                lon: 32.883711, 
+                lat: 39.931340, 
+                type: "Work", 
+                details: "2023 Summer Internship (30 days)", 
+                imageFileName: "gdm.jpg" 
+            },
+            { 
+                name: "YılDev Mining (Internship II)", 
+                lon: 32.816717, 
+                lat: 39.887429, 
+                type: "Work", 
+                details: "2025 Summer Internship (20 days)", 
+                imageFileName: "YılDev.jpg" 
+            }, 
+            { 
+                name: "Living Area (Ankara)", 
+                lon: 32.880605, 
+                lat: 39.970913, 
+                type: "Life", 
+                details: "Current Living Location in Ankara", 
+                imageFileName: "home.jpg" 
+            }
+        ];
+        
+        // **********************************************
+        // 2. STYLE DEFINITION
+        // **********************************************
+        const nodeStyles = {
+            'Education': new ol.style.Style({
+                image: new ol.style.Circle({ radius: 10, fill: new ol.style.Fill({ color: '#66fcf1' }), stroke: new ol.style.Stroke({ color: '#1f2833', width: 2 }) })
+            }),
+            'Work': new ol.style.Style({
+                image: new ol.style.Circle({ radius: 10, fill: new ol.style.Fill({ color: '#f39c12' }), stroke: new ol.style.Stroke({ color: '#1f2833', width: 2 }) })
+            }),
+            'Life': new ol.style.Style({
+                image: new ol.style.Circle({ radius: 10, fill: new ol.style.Fill({ color: '#e74c3c' }), stroke: new ol.style.Stroke({ color: '#1f2833', width: 2 }) })
+            })
+        };
+        const defaultLineStyles = {
+            'Education': new ol.style.Stroke({ color: '#66fcf1', width: 3, lineDash: [1, 5] }),
+            'Work': new ol.style.Stroke({ color: '#f39c12', width: 3, lineDash: [10, 10] }),
+            'Life': new ol.style.Stroke({ color: '#e74c3c', width: 3, lineDash: [] })
+        };
+
+        // **********************************************
+        // 3. VECTOR LAYERS (Separating nodes by Type)
+        // **********************************************
+        const coords = {};
+        const layerGroups = {}; 
+
+        // Separate points by type and create their layers
+        nodes.forEach(node => {
+            const coord = ol.proj.fromLonLat([node.lon, node.lat]);
+            coords[node.type + node.name] = coord;
+            
+            const marker = new ol.Feature({
+                geometry: new ol.geom.Point(coord),
+                type: node.type, 
+                name: node.name,
+                details: node.details,
+                imageFileName: node.imageFileName 
+            });
+            
+            marker.setStyle(nodeStyles[node.type]);
+
+            if (!layerGroups[node.type]) {
+                layerGroups[node.type] = new ol.layer.Vector({
+                    source: new ol.source.Vector(),
+                    title: node.type, 
+                    visible: true 
+                });
+            }
+            layerGroups[node.type].getSource().addFeature(marker);
+        });
+
+        // Relationship Lines (Edges) Layer
+        const edgesFeatures = [];
+        const relationships = [
+            { start: "EducationHacettepe Geomatics Eng. (Education)", end: "WorkHGM (Internship I)", type: 'Education' },
+            { start: "WorkHGM (Internship I)", end: "WorkYılDev Mining (Internship II)", type: 'Work' },
+            { start: "LifeYaşam Alanı (Ankara)", end: "EducationHacettepe Geomatics Eng. (Education)", type: 'Life' }
+        ];
+
+        relationships.forEach(rel => {
+            const startCoord = coords[rel.start];
+            const endCoord = coords[rel.end];
+
+            if (startCoord && endCoord) {
+                const lineFeature = new ol.Feature({
+                    geometry: new ol.geom.LineString([startCoord, endCoord]),
+                    type: rel.type 
+                });
+                lineFeature.setStyle(new ol.style.Style({ stroke: defaultLineStyles[rel.type] }));
+                edgesFeatures.push(lineFeature);
+            }
+        });
+
+        const edgesVectorLayer = new ol.layer.Vector({
+            source: new ol.source.Vector({ features: edgesFeatures }),
+            title: 'All Relationship Lines',
+            visible: true 
+        });
+
+
+        // **********************************************
+        // 4. MAP CREATION
+        // **********************************************
+        const osmLayer = new ol.layer.Tile({
+            source: new ol.source.OSM(),
+            title: 'Base Map',
+            visible: true
+        });
+
+        const allLayers = [osmLayer, edgesVectorLayer, ...Object.values(layerGroups)];
+
+        const map = new ol.Map({
+            target: 'map',
+            layers: allLayers,
+            controls: ol.control.defaults.defaults(),
+            view: new ol.View({
+                center: ol.proj.fromLonLat([32.84, 39.91]), 
+                zoom: 11
+            })
+        });
+        
+        // **********************************************
+        // 5. FUNCTION 1: Category Filtering and Buttons
+        // **********************************************
+        const filterContainer = document.querySelector('.filter-buttons');
+        const types = ['Education', 'Work', 'Life'];
+
+        types.forEach(type => {
+            const button = document.createElement('button');
+            button.textContent = type;
+            button.className = 'active'; 
+            button.setAttribute('data-type', type);
+
+            button.addEventListener('click', () => {
+                const isActive = button.classList.toggle('active');
+                
+                if (layerGroups[type]) {
+                    layerGroups[type].setVisible(isActive);
+                }
+
+                edgesVectorLayer.getSource().getFeatures().forEach(feature => {
+                    if (feature.get('type') === type) {
+                        const isVisible = layerGroups[type].getVisible(); 
+                        if (isVisible) {
+                            feature.setStyle(new ol.style.Style({ stroke: defaultLineStyles[type] }));
+                        } else {
+                            feature.setStyle(null); 
+                        }
+                    }
+                });
+            });
+            filterContainer.appendChild(button);
+        });
+
+        // **********************************************
+        // 6. FUNCTION 2: Coordinate Reader and Pop-up Management
+        // **********************************************
+        const coordinateOutput = document.getElementById('coordinate-output');
+        const container = document.getElementById('popup');
+        const content = document.getElementById('popup-content');
+        const closer = document.getElementById('popup-closer');
+        
+        const overlay = new ol.Overlay({
+            element: container,
+            autoPan: true,
+            autoPanAnimation: { duration: 250 }
+        });
+        map.addOverlay(overlay);
+
+        closer.onclick = function() {
+            overlay.setPosition(undefined);
+            closer.blur();
+            return false;
+        };
+        
+        map.on('singleclick', function (evt) {
+            // 1. Read and Display Coordinates
+            const lonLat = ol.proj.toLonLat(evt.coordinate);
+            const mercator = evt.coordinate;
+
+            const lonLatString = `Longitude/Latitude (EPSG:4326): <strong>${lonLat[0].toFixed(5)}, ${lonLat[1].toFixed(5)}</strong>`; 
+            const mercatorString = `Projection (EPSG:3857): <strong>${mercator[0].toFixed(0)}, ${mercator[1].toFixed(0)}</strong>`;
+            
+            coordinateOutput.innerHTML = `${lonLatString} <br> ${mercatorString}`;
+            
+            // 2. Open Pop-up if a Feature (Point) is Clicked
+            overlay.setPosition(undefined); 
+
+            const feature = map.forEachFeatureAtPixel(evt.pixel, function(feature) {
+                if (feature.getGeometry().getType() === 'Point') {
+                    return feature;
+                }
+            }, {
+                layerFilter: (layer) => layer.getVisible() 
+            });
+
+            if (feature) {
+                const coordinates = feature.getGeometry().getCoordinates();
+                const imageFile = feature.get('imageFileName'); 
+
+                content.innerHTML = `
+                    <h4>${feature.get('name')}</h4>
+                    <p style="margin-bottom: 5px;"><strong>Type:</strong> ${feature.get('type')}</p>
+                    <p style="margin-bottom: 0;">${feature.get('details')}</p>
+                    <div class="popup-image-container">
+                        <img src="${imageFile}" alt="${feature.get('name')} Image">
+                    </div>
+                `;
+                overlay.setPosition(coordinates);
+            }
+        });
+
+    </script>
+    
+</body>
+</html>
