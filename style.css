@@ -3,24 +3,24 @@
 /* -------------------------------------- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #ffffff; 
-    color: #333333; 
+    background-color: #ffffff; /* White Background */
+    color: #333333; /* Dark Gray Text */
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    display: flex; 
+    display: flex; /* Flexbox for Sidebar/Content layout */
 }
 
 /* -------------------------------------- */
-/* 1.5. NEW SIDEBAR STYLES */
+/* 1.5. NEW SIDEBAR STYLES (Menu on the left) */
 /* -------------------------------------- */
 .sidebar {
-    width: 250px; 
-    background-color: #f0f0f0; 
+    width: 280px; /* Wider sidebar for content visibility */
+    background-color: #f8f9fa; /* Very Light Gray (Menu Background) */
     box-shadow: 2px 0 10px rgba(0,0,0,0.1);
     padding: 30px 20px;
     height: 100vh;
-    position: fixed; 
+    position: fixed; /* Fixed position */
     top: 0;
     left: 0;
     display: flex;
@@ -31,56 +31,116 @@ body {
     z-index: 1000;
 }
 
+.sidebar-profile {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ced4da;
+    width: 100%;
+}
+
+.sidebar-photo-container {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto 15px auto;
+    border: 3px solid #343a40; /* Dark Border */
+}
+
+.sidebar-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.sidebar-profile h2 {
+    color: #343a40; /* Dark Text */
+    font-size: 1.5em;
+    margin: 0 0 5px 0;
+}
+.sidebar-profile p {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin: 0;
+}
+
+
 .sidebar-nav {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     width: 100%;
     margin-bottom: 40px;
 }
 
 .sidebar-nav a {
-    color: #007bff; 
+    color: #343a40; /* Dark Text */
     text-decoration: none;
-    padding: 10px 15px;
-    border: 1px solid #007bff;
+    padding: 12px 15px;
+    border: 1px solid #adb5bd;
     border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s;
     font-weight: 600;
 }
-
-.sidebar-nav a:hover {
-    background-color: #007bff;
+/* Active state for navigation, set to the dark background of the sidebar reference */
+.sidebar-nav a.active {
+    background-color: #343a40; 
     color: #ffffff;
 }
 
+.sidebar-nav a:hover {
+    background-color: #dc3545; /* Red/Maroon Hover BG */
+    color: #ffffff; /* White Hover Text */
+    border-color: #dc3545;
+}
+
 .sidebar-social {
-    margin-top: auto; 
+    margin-top: auto; /* Push to the bottom */
     padding-top: 20px;
-    border-top: 1px solid #adb5bd;
+    border-top: 1px solid #ced4da;
     width: 100%;
+    text-align: left; /* Align social links text left */
+}
+
+.sidebar-social p {
+    color: #343a40; 
+    font-weight: 600;
+    margin: 0 0 10px 0;
 }
 
 .social-links {
     display: flex;
-    justify-content: space-around;
-    font-size: 24px;
-    margin-top: 15px;
+    flex-direction: column; /* Stack social links vertically */
+    gap: 8px;
+    font-size: 1em; /* Smaller font size */
+    margin-top: 5px;
 }
 
 .social-links a {
-    color: #333333; 
+    color: #495057; /* Icon color */
     transition: color 0.3s;
     text-decoration: none;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
 }
 
 .social-links a:hover {
-    color: #dc3545; 
+    color: #dc3545; /* Red/Maroon Highlight */
+}
+
+.social-icon {
+    font-size: 1.2em;
+    width: 25px; /* Fixed width for icon spacing */
+    text-align: center;
+    margin-right: 10px;
 }
 
 
+/* Main Content Area */
 .content-wrapper {
-    margin-left: 250px; 
+    margin-left: 280px; /* Offset for Sidebar width */
     flex-grow: 1;
     padding: 20px;
 }
@@ -89,9 +149,9 @@ body {
 .main-card {
     max-width: 900px;
     margin: 50px auto;
-    background-color: #f0f0f0; 
+    background-color: #ffffff; /* White Card Background */
     border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     padding-bottom: 30px;
     text-align: center;
 }
@@ -115,7 +175,7 @@ body {
     color: #333333; 
 }
 .bio-text h2 {
-    color: #007bff; 
+    color: #343a40; /* Dark Title */
     font-size: 2.2em;
     margin-top: 0;
     margin-bottom: 15px;
@@ -127,21 +187,22 @@ body {
     margin-bottom: 10px; 
 }
 
-.profile-photo-container {
-    width: 200px;
-    height: 200px;
+/* Updated: Photo container for main content - not circular anymore */
+.main-content-photo-container {
+    width: 30%; /* Adjust width as needed */
+    max-width: 250px; /* Maximum width */
+    height: auto;
     overflow: hidden;
-    border-radius: 50%;
-    border: 4px solid #007bff; 
-    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0.1); 
+    border: 4px solid #dc3545; /* Red/Maroon Highlight */
+    box-shadow: 0 0 0 10px rgba(220, 53, 69, 0.1); 
     flex-shrink: 0; 
+    border-radius: 8px; /* Slightly rounded corners */
 }
-.profile-photo {
+.main-content-photo {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     display: block;
-    background-color: #e9ecef; 
+    background-color: #e9ecef; /* Light Gray photo background */
 }
 
 /* Adaptations for small screens */
@@ -150,6 +211,7 @@ body {
         margin-left: 0; 
         padding-top: 10px; 
     }
+    /* Sidebar goes to the top, responsive */
     .sidebar {
         width: 100%;
         height: auto;
@@ -162,12 +224,14 @@ body {
         flex-wrap: wrap;
         justify-content: center;
     }
-    .sidebar .bio-text {
+    .sidebar-profile {
         width: 100%;
-        margin-bottom: 10px !important;
-    }
-    .sidebar .bio-text h2 {
-        font-size: 1.5em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
     }
     .sidebar-nav {
         flex-direction: row;
@@ -181,6 +245,19 @@ body {
         padding-top: 10px;
         width: 100%;
         border-top: none;
+        text-align: center; 
+    }
+    .social-links {
+        flex-direction: row; 
+        justify-content: center;
+        gap: 20px;
+    }
+    .social-links a {
+        padding: 0;
+        margin: 0;
+    }
+    .social-icon {
+        display: none; /* Hide icons in small screen horizontal layout for simplicity */
     }
     .intro-header-flex {
         flex-direction: column;
@@ -191,9 +268,10 @@ body {
         flex-basis: 100%;
         order: 2;
     }
-    .profile-photo-container {
+    .main-content-photo-container {
         margin-bottom: 20px;
         order: 1;
+        width: 50%; /* Adjust size for smaller screens */
     }
 }
 
@@ -203,7 +281,7 @@ body {
 /* -------------------------------------- */
 
 .card-title {
-    color: #dc3545; 
+    color: #dc3545; /* Red/Maroon Highlight */
     padding: 10px 0;
     margin-bottom: 20px;
     font-size: 2em;
@@ -214,20 +292,24 @@ body {
 /* -------------------------------------- */
 .timeline {
     position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px 0;
+    max-width: 800px; 
+    margin: 40px auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: initial; 
 }
 
+/* Center Line */
 .timeline::after {
     content: '';
     position: absolute;
-    width: 6px;
-    background-color: #adb5bd; 
+    width: 4px; 
+    background-color: #adb5bd; /* Light Gray Line */
     top: 0;
     bottom: 0;
     left: 50%;
-    margin-left: -3px;
+    margin-left: -2px;
+    z-index: -1;
 }
 
 /* -------------------------------------- */
@@ -238,36 +320,50 @@ body {
     position: relative;
     width: 50%;
     box-sizing: border-box;
+    margin-bottom: 30px;
     animation: slideInFromLeft 1.2s ease-out forwards;
     opacity: 0; 
 }
 
-.timeline-item.right {
-    left: 50%;
-    animation: slideInFromRight 1.2s ease-out forwards;
-}
-
+/* Contact point of each box with the center line */
 .timeline-item::after {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
-    right: -10px;
-    background-color: #f0f0f0; 
-    border: 3px solid #007bff; 
-    top: 15px;
+    width: 15px; 
+    height: 15px;
+    right: -10.5px;
+    background-color: #ffffff; /* White Dot Background */
+    border: 3px solid #dc3545; /* Red/Maroon Dot Border */
+    top: 25px;
     border-radius: 50%;
     z-index: 1;
 }
 
-.timeline-item.right::after {
-    left: -10px;
+/* Style and positions for left boxes */
+.left {
+    left: 0;
+    animation: slideInFromLeft 1.2s ease-out forwards;
+    opacity: 0; 
+}
+.left::after {
+    left: auto;
+    right: -8.5px; 
+}
+
+/* Style and positions for right boxes */
+.right {
+    left: 50%;
+    animation: slideInFromRight 1.2s ease-out forwards;
+    opacity: 0; 
+}
+.right::after {
+    left: -8.5px;
 }
 
 /* Event box content */
 .timeline-content {
     padding: 20px 25px;
-    background-color: #e9ecef; 
+    background-color: #e9ecef; /* Very Light Gray Box BG */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     text-align: left;
@@ -281,13 +377,13 @@ body {
 }
 
 .timeline-content h2 {
-    color: #dc3545; 
+    color: #dc3545; /* Red/Maroon Title */
     margin-top: 0;
     margin-bottom: 8px;
     font-size: 1.6em;
 }
 .timeline-content p, .timeline-content small {
-    color: #555555; 
+    color: #555555;
 }
 
 @media screen and (max-width: 600px) {
@@ -314,16 +410,17 @@ body {
 /* -------------------------------------- */
 /* 6. CSS ANIMATIONS */
 /* -------------------------------------- */
-@keyframes slideInFromLeft {
-    0% { opacity: 0; transform: translateX(-50px); }
-    100% { opacity: 1; transform: translateX(0); }
-}
-
 @keyframes slideInFromRight {
     0% { opacity: 0; transform: translateX(50px); }
     100% { opacity: 1; transform: translateX(0); }
 }
 
+@keyframes slideInFromLeft {
+    0% { opacity: 0; transform: translateX(-50px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Animation Delays */
 .timeline-item:nth-child(1) { animation-delay: 0.1s; }
 .timeline-item:nth-child(2) { animation-delay: 0.2s; }
 .timeline-item:nth-child(3) { animation-delay: 0.3s; }
