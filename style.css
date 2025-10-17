@@ -3,179 +3,167 @@
 /* -------------------------------------- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #ffffff; /* White Background */
-    color: #333333; /* Dark Gray Text */
+    background-color: #f7f7f7;
+    color: #343a40; 
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    display: flex; /* Flexbox for Sidebar/Content layout */
+    display: flex; 
 }
 
 /* -------------------------------------- */
-/* 1.5. NEW SIDEBAR STYLES (Menu on the left) */
+/* 1.5. SIDEBAR STYLES (Menu on the left) */
 /* -------------------------------------- */
 .sidebar {
-    width: 280px; /* Wider sidebar for content visibility */
-    background-color: #f8f9fa; /* Very Light Gray (Menu Background) */
-    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    width: 280px; 
+    min-width: 280px; 
+    background-color: #ffffff; 
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1); 
     padding: 30px 20px;
     height: 100vh;
-    position: fixed; /* Fixed position */
+    position: fixed; 
     top: 0;
     left: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    border-right: 1px solid #dee2e6;
+    border-right: 1px solid #e9ecef; 
     z-index: 1000;
 }
 
 .sidebar-profile {
     margin-bottom: 30px;
     padding-bottom: 20px;
-    border-bottom: 1px solid #ced4da;
-    width: 100%;
+    border-bottom: 1px solid #e9ecef;
 }
 
 .sidebar-photo-container {
     width: 100px;
     height: 100px;
-    overflow: hidden;
     border-radius: 50%;
-    margin: 0 auto 15px auto;
-    border: 3px solid #343a40; /* Dark Border */
+    overflow: hidden;
+    margin: 0 auto 15px;
+    border: 3px solid #343a40; 
 }
 
 .sidebar-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
 }
 
 .sidebar-profile h2 {
-    color: #343a40; /* Dark Text */
+    color: #000000; 
+    margin: 5px 0 0;
     font-size: 1.5em;
-    margin: 0 0 5px 0;
-}
-.sidebar-profile p {
-    font-size: 0.9em;
-    color: #6c757d;
-    margin: 0;
 }
 
+.sidebar-profile p {
+    color: #6c757d; 
+    margin-top: 5px;
+    font-size: 0.9em;
+}
 
 .sidebar-nav {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .sidebar-nav a {
-    color: #343a40; /* Dark Text */
+    color: #343a40; 
+    background-color: #f8f9fa; 
     text-decoration: none;
     padding: 12px 15px;
-    border: 1px solid #adb5bd;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s;
-    font-weight: 600;
-}
-/* Active state for navigation, set to the dark background of the sidebar reference */
-.sidebar-nav a.active {
-    background-color: #343a40; 
-    color: #ffffff;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s;
+    font-weight: 500;
+    text-align: left;
+    border: 1px solid #e9ecef;
 }
 
 .sidebar-nav a:hover {
-    background-color: #dc3545; /* Red/Maroon Hover BG */
-    color: #ffffff; /* White Hover Text */
-    border-color: #dc3545;
+    background-color: #e2e6ea;
+    color: #000000;
+}
+
+.sidebar-nav a.active {
+    background-color: #343a40; 
+    color: #fff;
+    border-color: #343a40;
+    font-weight: bold;
 }
 
 .sidebar-social {
-    margin-top: auto; /* Push to the bottom */
-    padding-top: 20px;
-    border-top: 1px solid #ced4da;
     width: 100%;
-    text-align: left; /* Align social links text left */
+    text-align: left;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
 }
 
 .sidebar-social p {
-    color: #343a40; 
-    font-weight: 600;
-    margin: 0 0 10px 0;
-}
-
-.social-links {
-    display: flex;
-    flex-direction: column; /* Stack social links vertically */
-    gap: 8px;
-    font-size: 1em; /* Smaller font size */
-    margin-top: 5px;
+    color: #6c757d;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 0.9em;
 }
 
 .social-links a {
-    color: #495057; /* Icon color */
-    transition: color 0.3s;
-    text-decoration: none;
-    padding: 5px 0;
     display: flex;
     align-items: center;
+    color: #343a40; 
+    text-decoration: none;
+    padding: 5px 0;
+    transition: color 0.3s;
 }
 
 .social-links a:hover {
-    color: #dc3545; /* Red/Maroon Highlight */
+    color: #000000; 
 }
 
 .social-icon {
     font-size: 1.2em;
-    width: 25px; /* Fixed width for icon spacing */
-    text-align: center;
     margin-right: 10px;
-}
-
-
-/* Main Content Area */
-.content-wrapper {
-    margin-left: 280px; /* Offset for Sidebar width */
-    flex-grow: 1;
-    padding: 20px;
-}
-
-/* MAIN CARD STRUCTURE - Centers all content */
-.main-card {
-    max-width: 900px;
-    margin: 50px auto;
-    background-color: #ffffff; /* White Card Background */
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-    padding-bottom: 30px;
+    min-width: 20px;
     text-align: center;
 }
 
 /* -------------------------------------- */
-/* 2. INTRO SECTION */
+/* 2. MAIN CONTENT AREA (Card) */
+/* -------------------------------------- */
+.main-card {
+    margin: 50px auto 50px 330px; 
+    max-width: 900px; 
+    background-color: #ffffff; 
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+    padding: 0 30px 30px 30px; 
+    flex-grow: 1; 
+}
+
+/* -------------------------------------- */
+/* 3. INTRO SECTION (Text LEFT, Photo RIGHT) */
 /* -------------------------------------- */
 .intro-header-flex {
     display: flex; 
     align-items: center; 
-    justify-content: space-around; 
-    padding: 40px 30px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    justify-content: space-between; 
+    padding: 40px 0; 
+    border-bottom: 1px solid #e9ecef; 
     flex-wrap: wrap; 
 }
 
 .bio-text {
-    flex-basis: 55%; 
+    flex-basis: 60%; 
     padding-right: 30px; 
     text-align: left; 
-    color: #333333; 
+    color: #343a40; 
 }
 .bio-text h2 {
-    color: #343a40; /* Dark Title */
+    color: #000000; 
     font-size: 2.2em;
     margin-top: 0;
     margin-bottom: 15px;
@@ -183,113 +171,38 @@ body {
 .bio-text p {
     font-size: 1.05em;
     line-height: 1.6; 
-    color: #555555; 
+    color: #495057; 
     margin-bottom: 10px; 
 }
 
-/* Updated: Photo container for main content - not circular anymore */
-.main-content-photo-container {
-    width: 30%; /* Adjust width as needed */
-    max-width: 250px; /* Maximum width */
-    height: auto;
-    overflow: hidden;
-    border: 4px solid #dc3545; /* Red/Maroon Highlight */
-    box-shadow: 0 0 0 10px rgba(220, 53, 69, 0.1); 
-    flex-shrink: 0; 
-    border-radius: 8px; /* Slightly rounded corners */
+.profile-photo-container {
+    flex-basis: 35%; 
+    flex-shrink: 0;
+    width: 250px; 
+    height: 320px; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    border: 4px solid #343a40; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
 }
-.main-content-photo {
+.profile-photo {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover; 
     display: block;
-    background-color: #e9ecef; /* Light Gray photo background */
-}
-
-/* Adaptations for small screens */
-@media (max-width: 768px) {
-    .content-wrapper {
-        margin-left: 0; 
-        padding-top: 10px; 
-    }
-    /* Sidebar goes to the top, responsive */
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative; 
-        box-shadow: none;
-        border-right: none;
-        border-bottom: 1px solid #dee2e6;
-        padding: 10px 20px;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .sidebar-profile {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        margin-bottom: 15px;
-        padding-bottom: 15px;
-    }
-    .sidebar-nav {
-        flex-direction: row;
-        gap: 10px;
-        margin-bottom: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .sidebar-social {
-        margin-top: 0;
-        padding-top: 10px;
-        width: 100%;
-        border-top: none;
-        text-align: center; 
-    }
-    .social-links {
-        flex-direction: row; 
-        justify-content: center;
-        gap: 20px;
-    }
-    .social-links a {
-        padding: 0;
-        margin: 0;
-    }
-    .social-icon {
-        display: none; /* Hide icons in small screen horizontal layout for simplicity */
-    }
-    .intro-header-flex {
-        flex-direction: column;
-    }
-    .bio-text {
-        padding-right: 0;
-        text-align: center;
-        flex-basis: 100%;
-        order: 2;
-    }
-    .main-content-photo-container {
-        margin-bottom: 20px;
-        order: 1;
-        width: 50%; /* Adjust size for smaller screens */
-    }
-}
-
-
-/* -------------------------------------- */
-/* 3. CARD TITLE STYLES */
-/* -------------------------------------- */
-
-.card-title {
-    color: #dc3545; /* Red/Maroon Highlight */
-    padding: 10px 0;
-    margin-bottom: 20px;
-    font-size: 2em;
 }
 
 /* -------------------------------------- */
 /* 4. TIMELINE MAIN STYLE */
 /* -------------------------------------- */
+.card-title {
+    color: #000000;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    font-size: 2em;
+    text-align: center;
+}
+
 .timeline {
     position: relative;
     max-width: 800px; 
@@ -304,7 +217,7 @@ body {
     content: '';
     position: absolute;
     width: 4px; 
-    background-color: #adb5bd; /* Light Gray Line */
+    background-color: #adb5bd; 
     top: 0;
     bottom: 0;
     left: 50%;
@@ -312,17 +225,13 @@ body {
     z-index: -1;
 }
 
-/* -------------------------------------- */
-/* 5. TIMELINE ITEMS (BOXES) */
-/* -------------------------------------- */
+/* TIMELINE ITEMS (BOXES) */
 .timeline-item {
     padding: 10px 40px;
     position: relative;
     width: 50%;
     box-sizing: border-box;
     margin-bottom: 30px;
-    animation: slideInFromLeft 1.2s ease-out forwards;
-    opacity: 0; 
 }
 
 /* Contact point of each box with the center line */
@@ -332,29 +241,24 @@ body {
     width: 15px; 
     height: 15px;
     right: -10.5px;
-    background-color: #ffffff; /* White Dot Background */
-    border: 3px solid #dc3545; /* Red/Maroon Dot Border */
+    background-color: #fff; 
+    border: 3px solid #343a40; 
     top: 25px;
     border-radius: 50%;
     z-index: 1;
 }
 
-/* Style and positions for left boxes */
+/* Left/Right positions */
 .left {
     left: 0;
-    animation: slideInFromLeft 1.2s ease-out forwards;
-    opacity: 0; 
 }
 .left::after {
     left: auto;
     right: -8.5px; 
 }
 
-/* Style and positions for right boxes */
 .right {
     left: 50%;
-    animation: slideInFromRight 1.2s ease-out forwards;
-    opacity: 0; 
 }
 .right::after {
     left: -8.5px;
@@ -363,12 +267,12 @@ body {
 /* Event box content */
 .timeline-content {
     padding: 20px 25px;
-    background-color: #e9ecef; /* Very Light Gray Box BG */
+    background-color: #f8f9fa; 
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     text-align: left;
     transition: transform 0.3s ease;
-    color: #333333; 
+    color: #343a40; 
 }
 
 .timeline-content:hover {
@@ -377,36 +281,79 @@ body {
 }
 
 .timeline-content h2 {
-    color: #dc3545; /* Red/Maroon Title */
+    color: #000000; 
     margin-top: 0;
     margin-bottom: 8px;
     font-size: 1.6em;
 }
 .timeline-content p, .timeline-content small {
-    color: #555555;
+    color: #495057; 
 }
 
-@media screen and (max-width: 600px) {
-    .timeline::after {
-        left: 31px;
+/* -------------------------------------- */
+/* 5. MEDIA QUERIES 
+/* -------------------------------------- */
+@media (max-width: 1024px) {
+    
+    body {
+        flex-direction: column;
     }
-
-    .timeline-item {
+    .sidebar {
         width: 100%;
-        padding-left: 70px;
-        padding-right: 25px;
+        height: auto;
+        position: static; 
+        padding: 20px 0;
+        box-shadow: none;
+        border-bottom: 1px solid #e9ecef;
+        border-right: none;
     }
-
-    .timeline-item.right {
-        left: 0%;
+    .sidebar-profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 0;
+        border-bottom: none;
     }
-
-    .timeline-item::after {
-        left: 15px;
-        right: auto;
+    .sidebar-nav {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    .sidebar-nav a {
+        width: auto;
+        flex-grow: 0;
+        text-align: center;
+    }
+    .sidebar-social {
+        display: none; 
+    }
+    
+    .main-card {
+        margin: 20px auto;
+        max-width: 95%;
+        margin-left: auto; 
+    }
+    
+    
+    .intro-header-flex {
+        flex-direction: column; 
+        padding: 30px 20px;
+    }
+    .bio-text {
+        padding-right: 0;
+        margin-bottom: 20px;
+        text-align: center;
+        flex-basis: 100%;
+    }
+    .profile-photo-container {
+        margin-top: 20px;
+        width: 180px;
+        height: 180px;
     }
 }
-
 /* -------------------------------------- */
 /* 6. CSS ANIMATIONS */
 /* -------------------------------------- */
@@ -421,11 +368,11 @@ body {
 }
 
 /* Animation Delays */
-.timeline-item:nth-child(1) { animation-delay: 0.1s; }
-.timeline-item:nth-child(2) { animation-delay: 0.2s; }
-.timeline-item:nth-child(3) { animation-delay: 0.3s; }
-.timeline-item:nth-child(4) { animation-delay: 0.4s; }
-.timeline-item:nth-child(5) { animation-delay: 0.5s; }
-.timeline-item:nth-child(6) { animation-delay: 0.6s; }
-.timeline-item:nth-child(7) { animation-delay: 0.7s; }
-.timeline-item:nth-child(8) { animation-delay: 0.8s; }
+.timeline-item:nth-child(1) { animation-delay: 0.2s; }
+.timeline-item:nth-child(2) { animation-delay: 0.4s; }
+.timeline-item:nth-child(3) { animation-delay: 0.6s; }
+.timeline-item:nth-child(4) { animation-delay: 0.8s; }
+.timeline-item:nth-child(5) { animation-delay: 1.0s; }
+.timeline-item:nth-child(6) { animation-delay: 1.2s; }
+.timeline-item:nth-child(7) { animation-delay: 1.4s; }
+.timeline-item:nth-child(8) { animation-delay: 1.6s; }
