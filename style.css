@@ -1,120 +1,209 @@
-
 /* -------------------------------------- */
 /* 1. GENERAL PAGE AND BACKGROUND STYLES */
 /* -------------------------------------- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0d1721; /* Very dark background close to black */
-    color: #ecf0f1; 
+    background-color: #ffffff; 
+    color: #333333; 
     margin: 0;
     padding: 0;
-    text-align: center;
     min-height: 100vh;
+    display: flex; 
+}
+
+/* -------------------------------------- */
+/* 1.5. NEW SIDEBAR STYLES */
+/* -------------------------------------- */
+.sidebar {
+    width: 250px; 
+    background-color: #f0f0f0; 
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    padding: 30px 20px;
+    height: 100vh;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-right: 1px solid #dee2e6;
+    z-index: 1000;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.sidebar-nav a {
+    color: #007bff; 
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 600;
+}
+
+.sidebar-nav a:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.sidebar-social {
+    margin-top: auto; 
+    padding-top: 20px;
+    border-top: 1px solid #adb5bd;
+    width: 100%;
+}
+
+.social-links {
+    display: flex;
+    justify-content: space-around;
+    font-size: 24px;
+    margin-top: 15px;
+}
+
+.social-links a {
+    color: #333333; 
+    transition: color 0.3s;
+    text-decoration: none;
+}
+
+.social-links a:hover {
+    color: #dc3545; 
+}
+
+
+.content-wrapper {
+    margin-left: 250px; 
+    flex-grow: 1;
+    padding: 20px;
 }
 
 /* MAIN CARD STRUCTURE - Centers all content */
 .main-card {
-    max-width: 900px; 
-    margin: 50px auto; 
-    background-color: #1f2833; /* Card Background */
+    max-width: 900px;
+    margin: 50px auto;
+    background-color: #f0f0f0; 
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     padding-bottom: 30px;
+    text-align: center;
 }
 
 /* -------------------------------------- */
-/* 2. INTRO SECTION (Text LEFT, Photo RIGHT - SIDE BY SIDE, LARGE PHOTO) */
+/* 2. INTRO SECTION */
 /* -------------------------------------- */
 .intro-header-flex {
     display: flex; 
     align-items: center; 
     justify-content: space-around; 
     padding: 40px 30px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     flex-wrap: wrap; 
 }
 
 .bio-text {
-    flex-basis: 55%; /* Text covers 55% of the area */
+    flex-basis: 55%; 
     padding-right: 30px; 
     text-align: left; 
-    color: #ecf0f1; 
+    color: #333333; 
 }
 .bio-text h2 {
-    color: #66fcf1; 
+    color: #007bff; 
     font-size: 2.2em;
     margin-top: 0;
     margin-bottom: 15px;
 }
 .bio-text p {
     font-size: 1.05em;
-    line-height: 1.6; /* Line spacing reduced for a more compact look */
-    color: #c5c6c7;
-    margin-bottom: 10px; /* Space between paragraphs reduced */
+    line-height: 1.6; 
+    color: #555555; 
+    margin-bottom: 10px; 
 }
 
 .profile-photo-container {
-    flex-basis: 35%; 
-    flex-shrink: 0;
-    width: 250px; /* Photo Size */
-    height: 250px; /* Photo Size */
-    border-radius: 5px; 
-    overflow: hidden; 
-    border: 4px solid #66fcf1; 
-    box-shadow: 0 0 0 10px rgba(102, 252, 241, 0.1); 
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 4px solid #007bff; 
+    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0.1); 
+    flex-shrink: 0; 
 }
 .profile-photo {
     width: 100%;
     height: 100%;
-    object-fit: contain; 
+    object-fit: cover;
     display: block;
-    background-color: #3a475a; 
+    background-color: #e9ecef; 
 }
 
 /* Adaptations for small screens */
 @media (max-width: 768px) {
+    .content-wrapper {
+        margin-left: 0; 
+        padding-top: 10px; 
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative; 
+        box-shadow: none;
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+        padding: 10px 20px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .sidebar .bio-text {
+        width: 100%;
+        margin-bottom: 10px !important;
+    }
+    .sidebar .bio-text h2 {
+        font-size: 1.5em;
+    }
+    .sidebar-nav {
+        flex-direction: row;
+        gap: 10px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .sidebar-social {
+        margin-top: 0;
+        padding-top: 10px;
+        width: 100%;
+        border-top: none;
+    }
     .intro-header-flex {
-        flex-direction: column; 
-        padding: 30px 20px;
+        flex-direction: column;
     }
     .bio-text {
         padding-right: 0;
-        margin-bottom: 20px;
         text-align: center;
         flex-basis: 100%;
+        order: 2;
     }
     .profile-photo-container {
-        margin-top: 20px;
-        width: 180px;
-        height: 180px;
+        margin-bottom: 20px;
+        order: 1;
     }
 }
 
 
 /* -------------------------------------- */
-/* 3. NAVIGATION STYLES */
+/* 3. CARD TITLE STYLES */
 /* -------------------------------------- */
-.card-nav {
-    margin: 20px auto;
-    padding: 15px 0;
-}
-.card-nav a {
-    color: #66fcf1; 
-    text-decoration: none;
-    padding: 10px 20px;
-    margin: 0 10px;
-    border: 2px solid #66fcf1; 
-    border-radius: 25px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-weight: bold;
-}
-.card-nav a:hover {
-    background-color: #66fcf1; 
-    color: #1f2833;
-}
 
 .card-title {
-    color: #f39c12; 
+    color: #dc3545; 
     padding: 10px 0;
     margin-bottom: 20px;
     font-size: 2em;
@@ -125,24 +214,20 @@ body {
 /* -------------------------------------- */
 .timeline {
     position: relative;
-    max-width: 800px; 
-    margin: 40px auto;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    text-align: initial; 
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
 }
 
-/* Center Line */
 .timeline::after {
     content: '';
     position: absolute;
-    width: 4px; 
-    background-color: #45a29e; 
+    width: 6px;
+    background-color: #adb5bd; 
     top: 0;
     bottom: 0;
     left: 50%;
-    margin-left: -2px;
-    z-index: -1;
+    margin-left: -3px;
 }
 
 /* -------------------------------------- */
@@ -153,88 +238,97 @@ body {
     position: relative;
     width: 50%;
     box-sizing: border-box;
-    margin-bottom: 30px;
+    animation: slideInFromLeft 1.2s ease-out forwards;
+    opacity: 0; 
 }
 
-/* Contact point of each box with the center line */
+.timeline-item.right {
+    left: 50%;
+    animation: slideInFromRight 1.2s ease-out forwards;
+}
+
 .timeline-item::after {
     content: '';
     position: absolute;
-    width: 15px; 
-    height: 15px;
-    right: -10.5px;
-    background-color: #1f2833; 
-    border: 3px solid #66fcf1; 
-    top: 25px;
+    width: 20px;
+    height: 20px;
+    right: -10px;
+    background-color: #f0f0f0; 
+    border: 3px solid #007bff; 
+    top: 15px;
     border-radius: 50%;
     z-index: 1;
 }
 
-/* Style and positions for left boxes */
-.left {
-    left: 0;
-    animation: slideInFromLeft 1.2s ease-out forwards;
-    opacity: 0; 
-}
-.left::after {
-    left: auto;
-    right: -8.5px; 
-}
-
-/* Style and positions for right boxes */
-.right {
-    left: 50%;
-    animation: slideInFromRight 1.2s ease-out forwards;
-    opacity: 0; 
-}
-.right::after {
-    left: -8.5px;
+.timeline-item.right::after {
+    left: -10px;
 }
 
 /* Event box content */
 .timeline-content {
     padding: 20px 25px;
-    background-color: #3a475a; 
+    background-color: #e9ecef; 
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     text-align: left;
     transition: transform 0.3s ease;
-    color: #ecf0f1; 
+    color: #333333; 
 }
 
 .timeline-content:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 .timeline-content h2 {
-    color: #f39c12; 
+    color: #dc3545; 
     margin-top: 0;
     margin-bottom: 8px;
     font-size: 1.6em;
 }
 .timeline-content p, .timeline-content small {
-    color: #c5c6c7;
+    color: #555555; 
+}
+
+@media screen and (max-width: 600px) {
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline-item.right {
+        left: 0%;
+    }
+
+    .timeline-item::after {
+        left: 15px;
+        right: auto;
+    }
 }
 
 /* -------------------------------------- */
-/* 6. CSS ANIMATIONS (15% REQUIREMENT) */
+/* 6. CSS ANIMATIONS */
 /* -------------------------------------- */
-@keyframes slideInFromRight {
-    0% { opacity: 0; transform: translateX(50px); }
-    100% { opacity: 1; transform: translateX(0); }
-}
-
 @keyframes slideInFromLeft {
     0% { opacity: 0; transform: translateX(-50px); }
     100% { opacity: 1; transform: translateX(0); }
 }
 
-/* Animation Delays */
-.timeline-item:nth-child(1) { animation-delay: 0.2s; }
-.timeline-item:nth-child(2) { animation-delay: 0.4s; }
-.timeline-item:nth-child(3) { animation-delay: 0.6s; }
-.timeline-item:nth-child(4) { animation-delay: 0.8s; }
-.timeline-item:nth-child(5) { animation-delay: 1.0s; }
-.timeline-item:nth-child(6) { animation-delay: 1.2s; }
-.timeline-item:nth-child(7) { animation-delay: 1.4s; }
+@keyframes slideInFromRight {
+    0% { opacity: 0; transform: translateX(50px); }
+    100% { opacity: 1; transform: translateX(0); }
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.2s; }
+.timeline-item:nth-child(3) { animation-delay: 0.3s; }
+.timeline-item:nth-child(4) { animation-delay: 0.4s; }
+.timeline-item:nth-child(5) { animation-delay: 0.5s; }
+.timeline-item:nth-child(6) { animation-delay: 0.6s; }
+.timeline-item:nth-child(7) { animation-delay: 0.7s; }
+.timeline-item:nth-child(8) { animation-delay: 0.8s; }
